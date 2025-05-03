@@ -1,0 +1,10 @@
+
+This folder will contain organized images for the Susegad Stays website:
+
+/hero - Hero section background images
+/apartment - Apartment interior and exterior photos
+/area - Local area attractions and landmarks
+/food - Food and restaurant images
+/footer - Footer graphics and textures
+
+Replace this file with actual images once they're available.
