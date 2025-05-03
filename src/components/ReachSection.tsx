@@ -1,6 +1,6 @@
 
 import React, { useEffect } from 'react';
-import { Plane, Train, Bus, Bike, Taxi } from 'lucide-react';
+import { Plane, Train, Bus, Bike, Car } from 'lucide-react';
 
 const ReachSection = () => {
   useEffect(() => {
@@ -52,7 +52,7 @@ const ReachSection = () => {
       tip: "Tip: We recommend Ride Easy for reliable rentals (contact included in welcome booklet)."
     },
     {
-      icon: Taxi,
+      icon: Car,
       title: "Taxis & Rides",
       description: "GoaMiles (Goa's official app) and Uber are available for convenient travel.",
       tip: "Tip: Save our trusted driver's number for airport pickups: +91 98701 23456"

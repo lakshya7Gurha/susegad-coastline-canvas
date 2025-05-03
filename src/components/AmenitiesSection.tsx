@@ -1,6 +1,6 @@
 
 import React, { useEffect } from 'react';
-import { Wifi, AirVent, Kitchen, Laundry, YogaMat, ReadingBook } from 'lucide-react';
+import { Wifi, Fan, UtensilsCrossed, Washing, Dumbbell, BookOpen, Droplets, Umbrella } from 'lucide-react';
 
 const AmenitiesSection = () => {
   useEffect(() => {
@@ -33,17 +33,17 @@ const AmenitiesSection = () => {
       description: "Stay connected with fast and reliable internet access."
     },
     {
-      icon: AirVent,
+      icon: Fan,
       title: "Air Conditioning",
       description: "All rooms equipped with modern AC units."
     },
     {
-      icon: Kitchen,
+      icon: UtensilsCrossed,
       title: "Fully Equipped Kitchen",
       description: "Everything you need to prepare delicious meals."
     },
     {
-      icon: Laundry,
+      icon: Washing,
       title: "Laundry Facilities",
       description: "Washing machine and drying space available."
     }
@@ -51,22 +51,22 @@ const AmenitiesSection = () => {
 
   const specialTouches = [
     {
-      icon: YogaMat,
+      icon: Dumbbell,
       title: "Yoga Mats",
       description: "Start your day with a peaceful yoga session."
     },
     {
-      icon: ReadingBook,
+      icon: BookOpen,
       title: "Reading Nook",
       description: "Cozy corner with a selection of books."
     },
     {
-      icon: Wifi,
+      icon: Droplets,
       title: "Water Filter",
       description: "Clean drinking water available at all times."
     },
     {
-      icon: Wifi,
+      icon: Umbrella,
       title: "Beach Essentials",
       description: "Beach towels, umbrellas, and picnic basket."
     }
