@@ -1,6 +1,6 @@
 
 import React, { useEffect } from 'react';
-import { Wifi, Fan, UtensilsCrossed, Washing, Dumbbell, BookOpen, Droplets, Umbrella } from 'lucide-react';
+import { Wifi, Fan, UtensilsCrossed, WashingMachine, Dumbbell, BookOpen, Droplets, Umbrella } from 'lucide-react';
 
 const AmenitiesSection = () => {
   useEffect(() => {
@@ -43,7 +43,7 @@ const AmenitiesSection = () => {
       description: "Everything you need to prepare delicious meals."
     },
     {
-      icon: Washing,
+      icon: WashingMachine,
       title: "Laundry Facilities",
       description: "Washing machine and drying space available."
     }
