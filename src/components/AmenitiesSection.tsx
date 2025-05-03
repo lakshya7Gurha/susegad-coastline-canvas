@@ -1,29 +1,12 @@
-
 import React, { useEffect } from 'react';
 import { Wifi, Fan, UtensilsCrossed, WashingMachine, Dumbbell, BookOpen, Droplets, Umbrella } from 'lucide-react';
+import { setupScrollAnimations } from '@/utils/animation';
 
 const AmenitiesSection = () => {
   useEffect(() => {
-    const observerOptions = {
-      root: null,
-      rootMargin: '0px',
-      threshold: 0.2,
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('animated');
-        }
-      });
-    }, observerOptions);
-
-    const elements = document.querySelectorAll('.animate-on-scroll');
-    elements.forEach(el => observer.observe(el));
-
-    return () => {
-      elements.forEach(el => observer.unobserve(el));
-    };
+    // Use the utility function instead of inline observer
+    const { cleanup } = setupScrollAnimations();
+    return cleanup;
   }, []);
 
   const essentials = [
@@ -73,7 +56,10 @@ const AmenitiesSection = () => {
   ];
 
   const AmenityItem = ({ Icon, title, description, delay }) => (
-    <div className={`flex items-start space-x-4 animate-on-scroll opacity-0`} style={{animationDelay: `${delay}s`}}>
+    <div 
+      className="flex items-start space-x-4 animate-on-scroll opacity-0 transition-opacity duration-500" 
+      style={{animationDelay: `${delay}s`}}
+    >
       <div className="p-3 bg-susegad-turquoise/10 rounded-lg text-susegad-turquoise">
         <Icon size={24} />
       </div>

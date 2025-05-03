@@ -1,29 +1,12 @@
-
 import React, { useEffect } from 'react';
 import { Plane, Train, Bus, Bike, Car } from 'lucide-react';
+import { setupScrollAnimations } from '@/utils/animation';
 
 const ReachSection = () => {
   useEffect(() => {
-    const observerOptions = {
-      root: null,
-      rootMargin: '0px',
-      threshold: 0.2,
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('animated');
-        }
-      });
-    }, observerOptions);
-
-    const elements = document.querySelectorAll('.animate-on-scroll');
-    elements.forEach(el => observer.observe(el));
-
-    return () => {
-      elements.forEach(el => observer.unobserve(el));
-    };
+    // Use the utility function instead of inline observer
+    const { cleanup } = setupScrollAnimations();
+    return cleanup;
   }, []);
 
   const transportOptions = [

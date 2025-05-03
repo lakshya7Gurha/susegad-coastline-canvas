@@ -1,28 +1,12 @@
 
 import React, { useEffect } from 'react';
+import { setupScrollAnimations } from '@/utils/animation';
 
 const GuidelinesSection = () => {
   useEffect(() => {
-    const observerOptions = {
-      root: null,
-      rootMargin: '0px',
-      threshold: 0.2,
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('animated');
-        }
-      });
-    }, observerOptions);
-
-    const elements = document.querySelectorAll('.animate-on-scroll');
-    elements.forEach(el => observer.observe(el));
-
-    return () => {
-      elements.forEach(el => observer.unobserve(el));
-    };
+    // Use the utility function instead of inline observer
+    const { cleanup } = setupScrollAnimations();
+    return cleanup;
   }, []);
 
   const guidelines = [
@@ -70,7 +54,7 @@ const GuidelinesSection = () => {
           {guidelines.map((guideline, index) => (
             <div 
               key={index} 
-              className="bg-white p-8 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 transform hover:-translate-y-1 hover:border-susegad-turquoise border-2 border-transparent animate-on-scroll" 
+              className="bg-white p-8 rounded-lg shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 hover:border-susegad-turquoise border-2 border-transparent animate-on-scroll opacity-0" 
               style={{animationDelay: `${index * 0.1}s`}}
             >
               <div className="text-4xl mb-4">{guideline.icon}</div>

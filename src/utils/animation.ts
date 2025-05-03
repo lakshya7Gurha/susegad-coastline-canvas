@@ -11,6 +11,8 @@ export const setupScrollAnimations = () => {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
+        // Add the animated class but don't remove it on exit
+        // This prevents the element from disappearing when hovering
         entry.target.classList.add('animated');
       }
     });
@@ -18,7 +20,14 @@ export const setupScrollAnimations = () => {
 
   // Observe all elements with animate-on-scroll class
   const elements = document.querySelectorAll('.animate-on-scroll');
-  elements.forEach(el => observer.observe(el));
+  
+  // Pre-initialize elements that might already be in view
+  elements.forEach(el => {
+    // Add a base opacity to ensure elements are at least partially visible
+    // even before animation is triggered
+    el.classList.add('opacity-30');
+    observer.observe(el);
+  });
 
   return {
     cleanup: () => {
