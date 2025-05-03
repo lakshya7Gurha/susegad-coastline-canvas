@@ -54,14 +54,14 @@ const ExploreSection = () => {
           {locations.map((location, index) => (
             <div 
               key={location.id} 
-              className={`relative overflow-hidden rounded-lg shadow-md transition-all duration-300 animate-on-scroll opacity-30 h-80 sm:h-96 lg:h-[30rem] ${
+              className={`relative overflow-hidden rounded-lg shadow-md transition-all duration-300 animate-on-scroll explore-card h-80 sm:h-96 lg:h-[30rem] ${
                 activeCard === location.id ? 'lg:col-span-2' : ''
               }`}
               onMouseEnter={() => setActiveCard(location.id)}
               onMouseLeave={() => setActiveCard(null)}
               style={{animationDelay: `${index * 0.1}s`}}
             >
-              <div className="absolute inset-0 bg-black bg-opacity-40 transition-opacity duration-300 hover:bg-opacity-50 z-10"></div>
+              <div className="absolute inset-0 bg-black bg-opacity-40 transition-opacity duration-300 explore-overlay z-10"></div>
               <img 
                 src={location.image} 
                 alt={location.name} 

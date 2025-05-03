@@ -131,6 +131,11 @@
   opacity: 1 !important;
 }
 
+/* Fixed background overlay for hover in Explore section */
+.explore-card:hover .explore-overlay {
+  background-color: rgba(0, 0, 0, 0.6) !important; /* Darker but not white */
+}
+
 /* Ensure smooth animation for expanding card */
 .lg\:col-span-2 {
   transition: all 0.5s ease-in-out;

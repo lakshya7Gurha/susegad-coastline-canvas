@@ -3,6 +3,12 @@ import React from 'react';
 import { Mail, Instagram, Facebook, Twitter, Phone } from 'lucide-react';
 
 const FooterSection = () => {
+  const phoneNumber = "+919810518195"; // Nikhil Grover's phone number
+  
+  // WhatsApp message template
+  const whatsappMessage = encodeURIComponent("Hello, I'm interested in booking a stay at Susegad Stays. Could you please provide more information?");
+  const whatsappUrl = `https://wa.me/${phoneNumber}?text=${whatsappMessage}`;
+
   return (
     <footer className="bg-black text-white py-16">
       <div className="container mx-auto px-6 md:px-12">
@@ -38,9 +44,18 @@ const FooterSection = () => {
                 <Phone className="text-susegad-turquoise mt-1" size={18} />
                 <div>
                   <p className="text-gray-300">Nikhil Grover</p>
-                  <a href="tel:+919810518195" className="text-gray-300 hover:text-white transition-colors">
-                    +91 9810518195
-                  </a>
+                  <div className="flex items-center space-x-3 mt-1">
+                    <a href={`tel:${phoneNumber}`} className="flex items-center text-gray-300 hover:text-white transition-colors">
+                      <span className="mr-1">Call</span>
+                      <Phone size={14} />
+                    </a>
+                    <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="flex items-center text-gray-300 hover:text-white transition-colors">
+                      <span className="mr-1">WhatsApp</span>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-message-circle">
+                        <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" />
+                      </svg>
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>

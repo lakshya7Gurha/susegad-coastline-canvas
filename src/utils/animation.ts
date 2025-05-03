@@ -23,10 +23,12 @@ export const setupScrollAnimations = () => {
   // Observe all elements with animate-on-scroll class
   const elements = document.querySelectorAll('.animate-on-scroll');
   
-  // Pre-initialize elements that might already be in view
+  // Pre-initialize elements with better opacity handling
   elements.forEach(el => {
-    // Start with base opacity but make sure it's visible
-    el.classList.add('opacity-30');
+    // Don't set initial opacity if it already has animated class
+    if (!el.classList.contains('animated')) {
+      el.classList.add('opacity-70'); // Increased from 30 to 70 for better visibility
+    }
     observer.observe(el);
   });
 
