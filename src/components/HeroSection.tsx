@@ -1,15 +1,10 @@
 
 import { Button } from "@/components/ui/button";
+import { scrollToSection } from "@/utils/animation";
 
 const HeroSection = () => {
   const scrollToBooking = () => {
-    const bookingSection = document.getElementById('booking');
-    if (bookingSection) {
-      window.scrollTo({
-        top: bookingSection.offsetTop - 80,
-        behavior: 'smooth'
-      });
-    }
+    scrollToSection('booking');
   };
 
   return (
@@ -17,7 +12,7 @@ const HeroSection = () => {
       <div 
         className="absolute inset-0 bg-cover bg-center z-0"
         style={{ 
-          backgroundImage: "url('https://images.unsplash.com/photo-1482938289607-e9573fc25ebb?ixlib=rb-1.2.1&auto=format&fit=crop&q=80')",
+          backgroundImage: "url('https://images.unsplash.com/photo-1616137422495-1e9e46e2aa77?ixlib=rb-1.2.1&auto=format&fit=crop&q=80')",
         }}
       >
         <div className="absolute inset-0 bg-black bg-opacity-40"></div>

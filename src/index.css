@@ -116,10 +116,22 @@
 
 /* Fix for animation and hover interaction */
 .animate-on-scroll {
-  transition: opacity 0.5s ease-out;
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+  will-change: opacity, transform;
 }
 
 .animate-on-scroll.animated {
   animation: fadeIn 0.8s forwards;
-  opacity: 1;
+  opacity: 1 !important; /* Use !important to ensure it overrides any other opacity settings */
+  transform: translateY(0);
+}
+
+/* Fix for hover states - ensure elements don't disappear when animating */
+.animate-on-scroll:hover {
+  opacity: 1 !important;
+}
+
+/* Ensure smooth animation for expanding card */
+.lg\:col-span-2 {
+  transition: all 0.5s ease-in-out;
 }

@@ -1,3 +1,4 @@
+
 import React, { useEffect } from 'react';
 import { setupScrollAnimations } from '@/utils/animation';
 
@@ -30,7 +31,7 @@ const AboutSection = () => {
           <div className="md:w-1/2 relative animate-on-scroll">
             <div className="absolute top-4 left-4 w-full h-full border-2 border-susegad-turquoise"></div>
             <img 
-              src="https://images.unsplash.com/photo-1518495973542-4542c06a5843?ixlib=rb-1.2.1&auto=format&fit=crop&q=80" 
+              src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-1.2.1&auto=format&fit=crop&q=80" 
               alt="Coastal Retreat"
               className="relative z-10 w-full h-80 object-cover"
             />

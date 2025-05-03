@@ -5,15 +5,17 @@ export const setupScrollAnimations = () => {
   const observerOptions = {
     root: null,
     rootMargin: '0px',
-    threshold: 0.2,
+    threshold: 0.1, // Lower threshold to trigger earlier
   };
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        // Add the animated class but don't remove it on exit
-        // This prevents the element from disappearing when hovering
+        // Add the animated class and ensure it stays
         entry.target.classList.add('animated');
+        
+        // Once animation is complete, we can stop observing to prevent repeated animations
+        observer.unobserve(entry.target);
       }
     });
   }, observerOptions);
@@ -23,8 +25,7 @@ export const setupScrollAnimations = () => {
   
   // Pre-initialize elements that might already be in view
   elements.forEach(el => {
-    // Add a base opacity to ensure elements are at least partially visible
-    // even before animation is triggered
+    // Start with base opacity but make sure it's visible
     el.classList.add('opacity-30');
     observer.observe(el);
   });
