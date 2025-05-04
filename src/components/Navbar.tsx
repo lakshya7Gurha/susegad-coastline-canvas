@@ -82,7 +82,7 @@ const Navbar = () => {
         
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center space-x-1">
-          <div className="bg-black/10 backdrop-blur-sm rounded-full px-2 py-1">
+          <div className={`${scrolled ? 'bg-gray-100/80' : 'bg-black/10'} backdrop-blur-sm rounded-full px-2 py-1`}>
             {navItems.map((item) => (
               <button
                 key={item.id}
@@ -90,7 +90,9 @@ const Navbar = () => {
                 className={`px-3 py-1.5 font-medium text-sm rounded-full transition-colors duration-300 ${
                   activeSection === item.id 
                     ? 'bg-susegad-turquoise text-black' 
-                    : 'text-white hover:bg-white/10'
+                    : scrolled 
+                      ? 'text-gray-800 hover:bg-gray-200/80' 
+                      : 'text-white hover:bg-white/10'
                 }`}
               >
                 {item.label}
@@ -103,7 +105,11 @@ const Navbar = () => {
           {/* Contact Button */}
           <a 
             href={`tel:${phoneNumber}`} 
-            className="flex items-center justify-center h-10 w-10 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors"
+            className={`flex items-center justify-center h-10 w-10 rounded-full ${
+              scrolled 
+                ? 'bg-gray-200 hover:bg-gray-300 text-gray-700' 
+                : 'bg-white/10 hover:bg-white/20 text-white'
+            } transition-colors`}
           >
             <Phone size={18} />
           </a>
@@ -127,13 +133,21 @@ const Navbar = () => {
           {/* Contact Button - Mobile */}
           <a 
             href={`tel:${phoneNumber}`} 
-            className="flex items-center justify-center h-9 w-9 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors"
+            className={`flex items-center justify-center h-9 w-9 rounded-full ${
+              scrolled 
+                ? 'bg-gray-200 hover:bg-gray-300 text-gray-700' 
+                : 'bg-white/10 hover:bg-white/20 text-white'
+            } transition-colors`}
           >
             <Phone size={16} />
           </a>
           
           <button
-            className={`p-2 rounded-full ${scrolled ? 'text-gray-600 hover:bg-gray-100' : 'text-white hover:bg-white/10'} focus:outline-none transition-colors`}
+            className={`p-2 rounded-full ${
+              scrolled 
+                ? 'text-gray-600 hover:bg-gray-100' 
+                : 'text-white hover:bg-white/10'
+            } focus:outline-none transition-colors`}
             onClick={toggleMobileMenu}
           >
             {mobileMenuOpen ? (
