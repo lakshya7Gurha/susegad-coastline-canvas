@@ -1,5 +1,6 @@
+
 import React, { useEffect } from 'react';
-import { Plane, Train, Bus, Bike, Car } from 'lucide-react';
+import { Plane, Train, Bus, Bike, Car, MapPin } from 'lucide-react';
 import { setupScrollAnimations } from '@/utils/animation';
 
 const ReachSection = () => {
@@ -46,9 +47,21 @@ const ReachSection = () => {
     <section id="reach" className="bg-gray-50 py-24">
       <div className="container mx-auto px-6 md:px-12">
         <h2 className="font-display text-4xl md:text-5xl font-medium mb-6 text-center">How to Reach</h2>
-        <p className="text-xl text-gray-600 mb-16 text-center max-w-3xl mx-auto">
-          Susegad Stays is conveniently located in Bambolim, making it easy to reach from anywhere in Goa.
+        <p className="text-xl text-gray-600 mb-6 text-center max-w-3xl mx-auto">
+          Susegad Stays is conveniently located near Bambolim Beach, opposite Grand Hyatt, making it easy to reach from anywhere in Goa.
         </p>
+        
+        <div className="flex justify-center mb-10">
+          <a 
+            href="https://maps.app.goo.gl/2xwuRc79oeQwmp627?g_st=com.google.maps.preview.copy" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="inline-flex items-center bg-susegad-turquoise hover:bg-susegad-turquoise/90 text-black px-4 py-2 rounded-md transition-colors"
+          >
+            <MapPin className="mr-2" size={18} />
+            <span>Open in Google Maps</span>
+          </a>
+        </div>
         
         <div className="space-y-8 max-w-4xl mx-auto">
           {transportOptions.map((option, index) => (

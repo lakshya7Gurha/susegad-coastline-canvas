@@ -1,11 +1,19 @@
 
 import { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
+import { Phone } from "lucide-react";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const isMobile = useIsMobile();
+  
+  // WhatsApp message template
+  const phoneNumber = "+919810518195"; // Nikhil Grover's phone number
+  const whatsappMessage = encodeURIComponent("Hello, I'm interested in booking a stay at Susegad Stays. Could you please provide more information?");
+  const whatsappUrl = `https://wa.me/${phoneNumber}?text=${whatsappMessage}`;
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
@@ -44,15 +52,26 @@ const Navbar = () => {
     }
   };
 
+  // List of navigation items
+  const navItems = [
+    { id: 'hero', label: 'Home' },
+    { id: 'about', label: 'About' },
+    { id: 'amenities', label: 'Amenities' },
+    { id: 'explore', label: 'Explore' },
+    { id: 'food', label: 'Food' },
+    { id: 'reach', label: 'How to Reach' },
+    { id: 'booking', label: 'Book' },
+  ];
+
   return (
     <nav 
       className={`fixed w-full z-50 transition-all duration-300 ${
         scrolled 
           ? 'bg-white/95 backdrop-blur-sm shadow-md py-2' 
-          : 'bg-transparent py-4'
+          : 'bg-gradient-to-b from-black/50 to-transparent py-4'
       }`}
     >
-      <div className="container mx-auto flex justify-between items-center">
+      <div className="container mx-auto px-4 flex justify-between items-center">
         <div className="flex items-center">
           <img 
             src="/lovable-uploads/6e59b46a-d238-4503-ac03-8be7ee21f542.png" 
@@ -62,78 +81,112 @@ const Navbar = () => {
         </div>
         
         {/* Desktop Navigation */}
-        <div className="hidden md:flex space-x-8">
-          {['hero', 'about', 'guidelines', 'amenities', 'explore', 'food', 'reach', 'booking'].map((section) => (
-            <button
-              key={section}
-              onClick={() => scrollToSection(section)}
-              className={`font-medium transition-colors duration-300 hover:text-susegad-turquoise ${
-                activeSection === section ? 'text-susegad-turquoise' : 'text-gray-600'
-              }`}
-            >
-              {section === 'hero' ? 'Home' : 
-               section === 'reach' ? 'How to Reach' : 
-               section.charAt(0).toUpperCase() + section.slice(1)}
-            </button>
-          ))}
+        <div className="hidden md:flex items-center space-x-1">
+          <div className="bg-black/10 backdrop-blur-sm rounded-full px-2 py-1">
+            {navItems.map((item) => (
+              <button
+                key={item.id}
+                onClick={() => scrollToSection(item.id)}
+                className={`px-3 py-1.5 font-medium text-sm rounded-full transition-colors duration-300 ${
+                  activeSection === item.id 
+                    ? 'bg-susegad-turquoise text-black' 
+                    : 'text-white hover:bg-white/10'
+                }`}
+              >
+                {item.label}
+              </button>
+            ))}
+          </div>
         </div>
         
-        <div className="hidden md:block">
-          <Button 
-            onClick={() => scrollToSection('booking')} 
-            className="bg-susegad-turquoise hover:bg-susegad-turquoise/90 text-black"
+        <div className="hidden md:flex items-center space-x-3">
+          {/* Contact Button */}
+          <a 
+            href={`tel:${phoneNumber}`} 
+            className="flex items-center justify-center h-10 w-10 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors"
           >
-            Book Now
-          </Button>
+            <Phone size={18} />
+          </a>
+          
+          {/* Book Button */}
+          <a 
+            href={whatsappUrl}
+            target="_blank" 
+            rel="noopener noreferrer"
+          >
+            <Button 
+              className="bg-susegad-turquoise hover:bg-susegad-turquoise/90 text-black font-medium"
+            >
+              Book Now
+            </Button>
+          </a>
         </div>
         
         {/* Mobile Menu Button */}
-        <button
-          className="md:hidden text-gray-600 focus:outline-none"
-          onClick={toggleMobileMenu}
-        >
-          {mobileMenuOpen ? (
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          ) : (
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-          )}
-        </button>
+        <div className="md:hidden flex items-center space-x-2">
+          {/* Contact Button - Mobile */}
+          <a 
+            href={`tel:${phoneNumber}`} 
+            className="flex items-center justify-center h-9 w-9 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors"
+          >
+            <Phone size={16} />
+          </a>
+          
+          <button
+            className={`p-2 rounded-full ${scrolled ? 'text-gray-600 hover:bg-gray-100' : 'text-white hover:bg-white/10'} focus:outline-none transition-colors`}
+            onClick={toggleMobileMenu}
+          >
+            {mobileMenuOpen ? (
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            ) : (
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            )}
+          </button>
+        </div>
       </div>
       
       {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-white shadow-lg absolute w-full">
-          <div className="px-4 py-2 space-y-3">
-            {['hero', 'about', 'guidelines', 'amenities', 'explore', 'food', 'reach', 'booking'].map((section) => (
+        <div className="md:hidden bg-white/95 backdrop-blur-sm shadow-lg absolute w-full max-h-[80vh] overflow-y-auto">
+          <div className="px-4 py-4 space-y-2">
+            {navItems.map((item) => (
               <button
-                key={section}
-                onClick={() => scrollToSection(section)}
-                className={`block w-full text-left py-2 font-medium ${
-                  activeSection === section ? 'text-susegad-turquoise' : 'text-gray-600'
+                key={item.id}
+                onClick={() => scrollToSection(item.id)}
+                className={`block w-full text-left py-3 px-4 rounded-lg font-medium ${
+                  activeSection === item.id 
+                  ? 'bg-susegad-turquoise/10 text-susegad-turquoise border-l-4 border-susegad-turquoise' 
+                  : 'text-gray-600 hover:bg-gray-50'
                 }`}
               >
-                {section === 'hero' ? 'Home' : 
-                 section === 'reach' ? 'How to Reach' : 
-                 section.charAt(0).toUpperCase() + section.slice(1)}
+                {item.label}
               </button>
             ))}
-            <Button 
-              onClick={() => scrollToSection('booking')} 
-              className="bg-susegad-turquoise hover:bg-susegad-turquoise/90 text-black w-full"
-            >
-              Book Now
-            </Button>
+            <div className="pt-4 mt-4 border-t border-gray-100">
+              <a 
+                href={whatsappUrl}
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="block w-full"
+              >
+                <Button 
+                  className="bg-susegad-turquoise hover:bg-susegad-turquoise/90 text-black w-full"
+                >
+                  Book Now
+                </Button>
+              </a>
+            </div>
           </div>
         </div>
       )}
 
       {/* WhatsApp Button (Mobile) */}
       <a
-        href="https://wa.me/919810518195"
+        href={whatsappUrl}
         target="_blank"
         rel="noopener noreferrer"
         className="fixed bottom-6 right-6 z-50 bg-green-500 text-white p-3 rounded-full shadow-lg hover:bg-green-600 transition-colors md:hidden"

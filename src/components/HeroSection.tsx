@@ -1,5 +1,6 @@
 
 import { Button } from "@/components/ui/button";
+import { MapPin } from "lucide-react";
 
 const HeroSection = () => {
   // WhatsApp message template
@@ -23,9 +24,13 @@ const HeroSection = () => {
           <h1 className="text-5xl md:text-7xl font-display font-medium text-white mb-4 opacity-0 animate-fade-in">
             Susegad Stays
           </h1>
-          <p className="text-xl md:text-3xl text-white mb-8 opacity-0 animate-fade-in-delay-1">
+          <p className="text-xl md:text-3xl text-white mb-4 opacity-0 animate-fade-in-delay-1">
             Unplug. Unwind. Embrace the Goan Way of Life.
           </p>
+          <div className="flex items-center text-white mb-8 opacity-0 animate-fade-in-delay-1">
+            <MapPin size={18} className="mr-2" />
+            <p className="text-lg">Near Bambolim Beach, opposite Grand Hyatt</p>
+          </div>
           <div className="opacity-0 animate-fade-in-delay-2">
             <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">
               <Button 

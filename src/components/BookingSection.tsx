@@ -1,6 +1,7 @@
 
 import { Button } from "@/components/ui/button";
 import { scrollToSection } from "@/utils/animation";
+import { MapPin } from "lucide-react";
 
 const BookingSection = () => {
   // WhatsApp message template
@@ -12,9 +13,14 @@ const BookingSection = () => {
     <section id="booking" className="bg-white py-24">
       <div className="container mx-auto px-6 md:px-12">
         <h2 className="font-display text-4xl md:text-5xl font-medium mb-6 text-center">Book Your Stay</h2>
-        <p className="text-xl text-gray-600 mb-16 text-center max-w-3xl mx-auto">
+        <p className="text-xl text-gray-600 mb-4 text-center max-w-3xl mx-auto">
           Ready to experience the Susegad way of life? Book directly through your preferred platform.
         </p>
+        
+        <div className="flex items-center justify-center mb-10">
+          <MapPin className="text-susegad-turquoise mr-2" size={18} />
+          <p className="text-gray-600">Near Bambolim Beach, opposite Grand Hyatt, Goa</p>
+        </div>
         
         <div className="max-w-3xl mx-auto">
           <div className="bg-gray-50 p-8 md:p-12 rounded-lg shadow-sm animate-on-scroll">
@@ -73,13 +79,15 @@ const BookingSection = () => {
                 </div>
                 
                 <div className="mt-10 pt-8 border-t border-gray-200 max-w-md w-full">
-                  <div className="flex items-center justify-center gap-3">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-susegad-turquoise">
-                      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
-                      <polyline points="22 4 12 14.01 9 11.01" />
-                    </svg>
-                    <p className="text-gray-600">Instant confirmation</p>
-                  </div>
+                  <a 
+                    href="https://maps.app.goo.gl/2xwuRc79oeQwmp627?g_st=com.google.maps.preview.copy" 
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center gap-3 text-susegad-turquoise hover:text-susegad-turquoise/80 transition-colors"
+                  >
+                    <MapPin size={18} />
+                    <p>View location on Google Maps</p>
+                  </a>
                 </div>
               </div>
             </div>

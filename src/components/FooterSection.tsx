@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Mail, Instagram, Facebook, Twitter, Phone } from 'lucide-react';
+import { Mail, Instagram, Facebook, Twitter, Phone, MapPin } from 'lucide-react';
 
 const FooterSection = () => {
   const phoneNumber = "+919810518195"; // Nikhil Grover's phone number
@@ -44,7 +44,7 @@ const FooterSection = () => {
                 <Phone className="text-susegad-turquoise mt-1" size={18} />
                 <div>
                   <p className="text-gray-300">Nikhil Grover</p>
-                  <div className="flex items-center space-x-3 mt-1">
+                  <div className="flex flex-wrap items-center gap-3 mt-1">
                     <a href={`tel:${phoneNumber}`} className="flex items-center text-gray-300 hover:text-white transition-colors">
                       <span className="mr-1">Call</span>
                       <Phone size={14} />
@@ -63,18 +63,24 @@ const FooterSection = () => {
           
           <div>
             <h3 className="text-2xl font-display mb-6">Location</h3>
-            <address className="text-gray-300 not-italic">
-              Susegad Stays<br />
-              Bambolim, North Goa<br />
-              Goa, India
-            </address>
+            <div className="flex items-start space-x-3">
+              <MapPin className="text-susegad-turquoise mt-1" size={18} />
+              <address className="text-gray-300 not-italic">
+                Susegad Stays<br />
+                Near Bambolim Beach, opposite Grand Hyatt<br />
+                Goa, India
+              </address>
+            </div>
             <a 
-              href="https://maps.app.goo.gl/t6BpgG7YY3ngtY4YA" 
+              href="https://maps.app.goo.gl/2xwuRc79oeQwmp627?g_st=com.google.maps.preview.copy" 
               target="_blank" 
               rel="noopener noreferrer" 
-              className="inline-block mt-4 text-susegad-turquoise hover:text-susegad-beige transition-colors"
+              className="inline-flex items-center mt-4 text-susegad-turquoise hover:text-susegad-beige transition-colors"
             >
-              View on Map →
+              <span className="mr-1">View on Map</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="9 18 15 12 9 6" />
+              </svg>
             </a>
           </div>
         </div>
