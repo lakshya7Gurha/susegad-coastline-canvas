@@ -1,11 +1,11 @@
 
 import { Button } from "@/components/ui/button";
-import { scrollToSection } from "@/utils/animation";
 
 const HeroSection = () => {
-  const scrollToBooking = () => {
-    scrollToSection('booking');
-  };
+  // WhatsApp message template
+  const phoneNumber = "+919810518195"; // Nikhil Grover's phone number
+  const whatsappMessage = encodeURIComponent("Hello, I'm interested in booking a stay at Susegad Stays. Could you please provide more information?");
+  const whatsappUrl = `https://wa.me/${phoneNumber}?text=${whatsappMessage}`;
 
   return (
     <section id="hero" className="relative h-screen flex items-center">
@@ -27,12 +27,13 @@ const HeroSection = () => {
             Unplug. Unwind. Embrace the Goan Way of Life.
           </p>
           <div className="opacity-0 animate-fade-in-delay-2">
-            <Button 
-              onClick={scrollToBooking} 
-              className="px-8 py-6 text-lg bg-susegad-turquoise hover:bg-susegad-turquoise/90 text-black"
-            >
-              Book Now
-            </Button>
+            <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">
+              <Button 
+                className="px-8 py-6 text-lg bg-susegad-turquoise hover:bg-susegad-turquoise/90 text-black"
+              >
+                Book Now
+              </Button>
+            </a>
           </div>
         </div>
       </div>
