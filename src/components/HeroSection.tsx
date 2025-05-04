@@ -7,6 +7,9 @@ const HeroSection = () => {
   const phoneNumber = "+919810518195"; // Nikhil Grover's phone number
   const whatsappMessage = encodeURIComponent("Hello, I'm interested in booking a stay at Susegad Stays. Could you please provide more information?");
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${whatsappMessage}`;
+  
+  // Google Maps link
+  const mapsUrl = "https://maps.app.goo.gl/2xwuRc79oeQwmp627?g_st=com.google.maps.preview.copy";
 
   return (
     <section id="hero" className="relative h-screen flex items-center">
@@ -27,10 +30,15 @@ const HeroSection = () => {
           <p className="text-xl md:text-3xl text-white mb-4 opacity-0 animate-fade-in-delay-1">
             Unplug. Unwind. Embrace the Goan Way of Life.
           </p>
-          <div className="flex items-center text-white mb-8 opacity-0 animate-fade-in-delay-1">
+          <a 
+            href={mapsUrl}
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="flex items-center text-white mb-8 opacity-0 animate-fade-in-delay-1 hover:text-susegad-turquoise transition-colors"
+          >
             <MapPin size={18} className="mr-2" />
             <p className="text-lg">Near Bambolim Beach, opposite Grand Hyatt</p>
-          </div>
+          </a>
           <div className="opacity-0 animate-fade-in-delay-2">
             <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">
               <Button 

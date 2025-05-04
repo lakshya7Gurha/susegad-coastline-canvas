@@ -14,6 +14,9 @@ import { setupScrollAnimations } from "@/utils/animation";
 
 const Index = () => {
   useEffect(() => {
+    // Set page title
+    document.title = "Susegad Stays | Experience the Goan Way of Life";
+    
     // Create intersection observer for animations
     const { cleanup } = setupScrollAnimations();
     return cleanup;
