@@ -10,6 +10,7 @@ import FoodSection from "@/components/FoodSection";
 import ReachSection from "@/components/ReachSection";
 import BookingSection from "@/components/BookingSection";
 import FooterSection from "@/components/FooterSection";
+import Gallery from "@/components/Gallery";
 import { setupScrollAnimations } from "@/utils/animation";
 
 const Index = () => {
@@ -27,6 +28,7 @@ const Index = () => {
       <Navbar />
       <HeroSection />
       <AboutSection />
+      <Gallery />
       <GuidelinesSection />
       <AmenitiesSection />
       <ExploreSection />
