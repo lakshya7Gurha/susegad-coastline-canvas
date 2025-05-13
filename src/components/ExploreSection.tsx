@@ -1,12 +1,12 @@
-
 import React, { useEffect, useState } from 'react';
 import { setupScrollAnimations } from '@/utils/animation';
+import { motion, AnimatePresence } from 'framer-motion';
+import { MapPin, ArrowRight } from 'lucide-react';
 
 const ExploreSection = () => {
-  const [activeCard, setActiveCard] = useState(null);
+  const [activeCard, setActiveCard] = useState<number | null>(null);
 
   useEffect(() => {
-    // Use the utility function instead of inline observer
     const { cleanup } = setupScrollAnimations();
     return cleanup;
   }, []);
@@ -15,89 +15,119 @@ const ExploreSection = () => {
     {
       id: 1,
       name: "Master Bedroom",
-      description: "A spacious and elegant bedroom with a king-size bed and luxury linens for ultimate comfort.",
-      image: "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?ixlib=rb-1.2.1&auto=format&fit=crop&q=80",
+      description: "A spacious and elegant bedroom with a king-size bed, luxury linens, and modern amenities for ultimate comfort.",
+      image: "/images/rooms/IMG_1975.JPG",
       mapLink: "https://maps.app.goo.gl/fCkPpFZ7oMUoxbYu7"
     },
     {
       id: 2,
       name: "Living Space",
-      description: "A bright, airy living room with comfortable seating and Goan-inspired decor elements.",
-      image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-1.2.1&auto=format&fit=crop&q=80",
+      description: "A bright, airy living room with comfortable seating, smart TV, and Goan-inspired decor elements for a perfect relaxation space.",
+      image: "/images/rooms/IMG_1961.JPG",
       mapLink: "https://maps.app.goo.gl/dBnM9rhh7DpNZN8v9"
     },
     {
       id: 3,
       name: "Kitchen & Dining",
-      description: "A fully equipped modern kitchen with all essentials for preparing delicious meals during your stay.",
-      image: "https://images.unsplash.com/photo-1588854337236-6889d631faa8?ixlib=rb-1.2.1&auto=format&fit=crop&q=80",
+      description: "A fully equipped modern kitchen with all essentials, dining area, and modern appliances for preparing delicious meals during your stay.",
+      image: "/images/rooms/IMG_1962.JPG",
       mapLink: "https://maps.app.goo.gl/VJz2QYTEQ5k5egeK9"
     },
     {
       id: 4,
-      name: "Private Balcony",
-      description: "Enjoy the sea breeze from your private balcony with comfortable seating and stunning views.",
-      image: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?ixlib=rb-1.2.1&auto=format&fit=crop&q=80",
+      name: "Bathroom",
+      description: "A modern, well-appointed bathroom with premium fixtures, hot water, and essential amenities for your comfort.",
+      image: "/images/rooms/IMG_1971.JPG",
       mapLink: "https://maps.app.goo.gl/eKw5kRK11KkqZDAy5"
     }
   ];
 
+  const cardVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: (i: number) => ({
+      opacity: 1,
+      y: 0,
+      transition: {
+        delay: i * 0.1,
+        duration: 0.5,
+        ease: "easeOut"
+      }
+    })
+  };
+
   return (
     <section id="explore" className="bg-gray-50 py-24">
-      <div className="container mx-auto px-6 md:px-12">
-        <h2 className="font-display text-4xl md:text-5xl font-medium mb-6 text-center">Experience Your Perfect Stay</h2>
-        <p className="text-xl text-gray-600 mb-16 text-center max-w-3xl mx-auto">
-          Our apartment is designed for comfort and relaxation. Take a look at the beautiful spaces you'll enjoy during your stay.
-        </p>
-        
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {locations.map((location, index) => (
-            <div 
-              key={location.id} 
-              className={`relative overflow-hidden rounded-lg shadow-md transition-all duration-300 animate-on-scroll explore-card h-80 sm:h-96 lg:h-[30rem] ${
-                activeCard === location.id ? 'lg:col-span-2' : ''
-              }`}
-              onMouseEnter={() => setActiveCard(location.id)}
-              onMouseLeave={() => setActiveCard(null)}
-              style={{animationDelay: `${index * 0.1}s`}}
-            >
-              <div className="absolute inset-0 bg-black bg-opacity-40 transition-opacity duration-300 explore-overlay z-10"></div>
-              <img 
-                src={location.image} 
-                alt={location.name} 
-                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-in-out hover:scale-110"
-              />
-              <div className="absolute inset-x-0 bottom-0 p-6 z-20">
-                <h3 className="text-white text-xl font-medium mb-2">{location.name}</h3>
-                <p className="text-white/90 mb-4 line-clamp-2">{location.description}</p>
-                <a 
-                  href={location.mapLink} 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="inline-flex items-center text-susegad-turquoise hover:text-white"
-                >
-                  <span>View details</span>
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                  </svg>
-                </a>
-              </div>
-            </div>
-          ))}
-        </div>
-        
-        <div className="mt-12 text-center">
-          <a
-            href="https://maps.app.goo.gl/t6BpgG7YY3ngtY4YA"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center text-susegad-turquoise hover:text-susegad-turquoise/80"
+      <div className="container mx-auto px-4 md:px-8 lg:px-16">
+        <div className="max-w-7xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="text-center mb-16"
           >
-            <span className="text-lg">View Susegad Stays on Google Maps</span>
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-            </svg>
-          </a>
+            <h2 className="font-display text-4xl md:text-5xl font-medium mb-6">Experience Your Perfect Stay</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Our apartment is designed for comfort and relaxation. Take a look at the beautiful spaces you'll enjoy during your stay.
+            </p>
+          </motion.div>
+          
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {locations.map((location, index) => (
+              <motion.div
+                key={location.id}
+                custom={index}
+                variants={cardVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                className={`relative overflow-hidden rounded-xl shadow-lg transition-all duration-500 h-[28rem] sm:h-[32rem] lg:h-[36rem] ${
+                  activeCard === location.id ? 'lg:col-span-2' : ''
+                }`}
+                onMouseEnter={() => setActiveCard(location.id)}
+                onMouseLeave={() => setActiveCard(null)}
+              >
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent z-10 transition-opacity duration-300"></div>
+                <img 
+                  src={location.image} 
+                  alt={location.name} 
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-in-out hover:scale-110"
+                />
+                <div className="absolute inset-x-0 bottom-0 p-8 z-20">
+                  <h3 className="text-white text-2xl font-medium mb-3">{location.name}</h3>
+                  <p className="text-white/90 mb-6 line-clamp-3 text-lg">{location.description}</p>
+                  <a 
+                    href={location.mapLink} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="inline-flex items-center text-susegad-turquoise hover:text-white transition-colors duration-300 group"
+                  >
+                    <span className="text-lg font-medium">View details</span>
+                    <ArrowRight className="h-5 w-5 ml-2 transform group-hover:translate-x-1 transition-transform duration-300" />
+                  </a>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+          
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            className="mt-16 text-center"
+          >
+            <a
+              href="https://maps.app.goo.gl/t6BpgG7YY3ngtY4YA"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center text-susegad-turquoise hover:text-susegad-turquoise/80 transition-colors duration-300 group"
+            >
+              <MapPin className="h-5 w-5 mr-2" />
+              <span className="text-lg font-medium">View Susegad Stays on Google Maps</span>
+              <ArrowRight className="h-5 w-5 ml-2 transform group-hover:translate-x-1 transition-transform duration-300" />
+            </a>
+          </motion.div>
         </div>
       </div>
     </section>

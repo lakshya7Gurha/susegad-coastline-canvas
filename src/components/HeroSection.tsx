@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { MapPin } from "lucide-react";
 
@@ -16,7 +15,7 @@ const HeroSection = () => {
       <div 
         className="absolute inset-0 bg-cover bg-center z-0"
         style={{ 
-          backgroundImage: "url('https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?ixlib=rb-1.2.1&auto=format&fit=crop&q=80')", 
+          backgroundImage: "url('/images/hero/296A0512-89F5-4022-A2CD-D5F6CF2CE653.jpg')", 
         }}
       >
         <div className="absolute inset-0 bg-black bg-opacity-40"></div>
