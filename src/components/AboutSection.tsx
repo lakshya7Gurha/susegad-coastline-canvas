@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { setupScrollAnimations } from '@/utils/animation';
 import { motion } from 'framer-motion';
+import OptimizedImage from './ui/optimized-image';
 
 const AboutSection = () => {
   useEffect(() => {
@@ -43,10 +44,14 @@ const AboutSection = () => {
             >
               <div className="absolute -top-4 -left-4 w-full h-full border-2 border-susegad-turquoise rounded-lg"></div>
               <div className="relative z-10 overflow-hidden rounded-lg shadow-xl">
-                <img 
+                <OptimizedImage 
                   src="/images/rooms/IMG_1973.JPG"
-                  alt="Coastal Retreat"
+                  alt="Coastal Retreat Interior"
                   className="w-full h-[32rem] object-cover transform hover:scale-105 transition-transform duration-700"
+                  priority={true}
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  quality={85}
+                  aspectRatio={16/9}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
               </div>

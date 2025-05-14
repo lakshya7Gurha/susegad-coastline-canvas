@@ -67,14 +67,14 @@ const Navbar = () => {
     <nav 
       className={`fixed w-full z-50 transition-all duration-300 ${
         scrolled 
-          ? 'bg-white/95 backdrop-blur-sm shadow-md py-2' 
+          ? 'bg-slate-700/95 backdrop-blur-sm shadow-md py-2' 
           : 'bg-gradient-to-b from-black/50 to-transparent py-4'
       }`}
     >
       <div className="container mx-auto px-4 flex justify-between items-center">
         <div className="flex items-center">
           <img 
-            src="/lovable-uploads/6e59b46a-d238-4503-ac03-8be7ee21f542.png" 
+            src="/images/logo/susegad stays - logo.png" 
             alt="Susegad Stays Logo"
             className="h-12 w-auto"
           />
