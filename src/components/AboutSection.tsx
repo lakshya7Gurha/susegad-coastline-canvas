@@ -1,133 +1,155 @@
-import React, { useEffect } from 'react';
-import { setupScrollAnimations } from '@/utils/animation';
+import React from 'react';
 import { motion } from 'framer-motion';
 import OptimizedImage from './ui/optimized-image';
+import { Button } from './ui/button';
+import { ChevronRight } from 'lucide-react';
 
 const AboutSection = () => {
-  useEffect(() => {
-    const { cleanup } = setupScrollAnimations();
-    return cleanup;
-  }, []);
-
   return (
-    <section id="about" className="bg-white py-24">
-      <div className="container mx-auto px-4 md:px-8 lg:px-16">
+    <section id="about" className="relative bg-gradient-to-b from-white to-susegad-cream py-32 overflow-hidden">
+      {/* Background Decorative Elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <motion.div
+          className="absolute -top-24 -right-24 w-96 h-96 bg-susegad-turquoise/5 rounded-full"
+          animate={{
+            scale: [1, 1.2, 1],
+            rotate: [0, 45, 0],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+        <motion.div
+          className="absolute -bottom-32 -left-32 w-96 h-96 bg-susegad-terracotta/5 rounded-full"
+          animate={{
+            scale: [1, 1.1, 1],
+            rotate: [0, -45, 0],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 1,
+          }}
+        />
+      </div>
+
+      <div className="container mx-auto px-4 md:px-8 lg:px-16 relative">
         <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col md:flex-row items-center gap-12 lg:gap-20">
+          <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
+            {/* Text Content */}
             <motion.div 
-              className="md:w-1/2"
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              className="lg:w-1/2"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
             >
-              <h2 className="font-display text-4xl md:text-5xl font-medium mb-6">Your Home by the Sea</h2>
-              <p className="text-lg text-gray-700 mb-6 leading-relaxed">
-                Welcome to our modern coastal retreat nestled in the heart of Goa. At Susegad Stays, we've created 
-                a tranquil haven where the Susegad philosophy—Goa's unique take on the laid-back, contented life—comes 
-                alive in every detail.
-              </p>
-              <p className="text-lg text-gray-700 leading-relaxed">
-                Our apartment offers the perfect blend of contemporary comfort and authentic Goan charm, 
-                just minutes from pristine beaches, local markets, and cultural landmarks. Whether you're 
-                catching the sunrise over the Arabian Sea, exploring the vibrant local scene, or simply 
-                unwinding on the balcony, we invite you to experience the true essence of Goan hospitality.
-              </p>
+              <div className="space-y-6">
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.2 }}
+                >
+                  <h2 className="font-display text-5xl md:text-6xl font-medium text-susegad-navy mb-6 leading-tight">
+                    Your Home by the Sea
+                  </h2>
+                </motion.div>
+
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.4 }}
+                  className="space-y-4"
+                >
+                  <p className="text-xl text-gray-700 leading-relaxed">
+                    Welcome to our modern coastal retreat nestled in the heart of Goa. At Susegad Stays, we've created 
+                    a tranquil haven where the Susegad philosophy—Goa's unique take on the laid-back, contented life—comes 
+                    alive in every detail.
+                  </p>
+                  <p className="text-xl text-gray-700 leading-relaxed">
+                    Our apartment offers the perfect blend of contemporary comfort and authentic Goan charm, 
+                    just minutes from pristine beaches, local markets, and cultural landmarks. Whether you're 
+                    catching the sunrise over the Arabian Sea, exploring the vibrant local scene, or simply 
+                    unwinding on the balcony, we invite you to experience the true essence of Goan hospitality.
+                  </p>
+                </motion.div>
+
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.6 }}
+                >
+                  <Button 
+                    className="group bg-susegad-turquoise hover:bg-susegad-turquoise/90 text-susegad-navy px-8 py-6 text-lg font-medium transition-all duration-300"
+                  >
+                    Discover More
+                    <ChevronRight className="ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
+                  </Button>
+                </motion.div>
+              </div>
             </motion.div>
             
+            {/* Image Content */}
             <motion.div 
-              className="md:w-1/2 relative"
-              initial={{ opacity: 0, x: 50 }}
+              className="lg:w-1/2 relative"
+              initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
             >
-              <div className="absolute -top-4 -left-4 w-full h-full border-2 border-susegad-turquoise rounded-lg"></div>
-              <div className="relative z-10 overflow-hidden rounded-lg shadow-xl">
-                <OptimizedImage 
-                  src="/images/rooms/IMG_1973.JPG"
-                  alt="Coastal Retreat Interior"
-                  className="w-full h-[32rem] object-cover transform hover:scale-105 transition-transform duration-700"
-                  priority={true}
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                  quality={85}
-                  aspectRatio={16/9}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
-              </div>
-              <div className="absolute -bottom-6 -right-6 flex gap-2">
+              <div className="relative">
+                {/* Decorative Elements */}
                 <motion.div 
-                  className="w-12 h-12 bg-susegad-beige rounded-full"
+                  className="absolute -top-6 -left-6 w-full h-full border-2 border-susegad-turquoise rounded-2xl"
                   animate={{ 
-                    y: [0, -10, 0],
-                    scale: [1, 1.1, 1]
-                  }}
-                  transition={{ 
-                    duration: 2,
-                    repeat: Infinity,
-                    ease: "easeInOut"
-                  }}
-                />
-                <motion.div 
-                  className="w-12 h-12 bg-susegad-turquoise rounded-full"
-                  animate={{ 
-                    y: [0, -10, 0],
-                    scale: [1, 1.1, 1]
-                  }}
-                  transition={{ 
-                    duration: 2,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                    delay: 0.3
-                  }}
-                />
-              </div>
-            </motion.div>
-          </div>
-          
-          <motion.div 
-            className="mt-20 flex justify-center"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-          >
-            <div className="w-24 h-24 relative">
-              <div className="absolute inset-0 flex justify-center items-center">
-                <motion.div 
-                  className="w-12 h-12 bg-susegad-beige rounded-full"
-                  animate={{ 
-                    scale: [1, 1.2, 1],
-                    rotate: [0, 180, 360]
+                    rotate: [0, 2, 0, -2, 0],
+                    scale: [1, 1.02, 1, 0.98, 1],
                   }}
                   transition={{ 
                     duration: 8,
                     repeat: Infinity,
-                    ease: "linear"
+                    ease: "easeInOut",
                   }}
                 />
-              </div>
-              <div className="absolute inset-0 flex justify-center items-center">
-                <motion.svg 
-                  viewBox="0 0 100 100" 
-                  className="w-full h-full text-susegad-turquoise"
-                  animate={{ rotate: 360 }}
+                
+                {/* Main Image */}
+                <div className="relative z-10 overflow-hidden rounded-2xl shadow-2xl">
+                  <OptimizedImage 
+                    src="/images/rooms/IMG_1973.JPG"
+                    alt="Coastal Retreat Interior"
+                    className="w-full h-[32rem] object-cover transform hover:scale-105 transition-transform duration-700"
+                    priority={true}
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    quality={90}
+                    aspectRatio={16/9}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent"></div>
+                </div>
+
+                {/* Floating Elements */}
+                <motion.div 
+                  className="absolute -bottom-8 -right-8 flex gap-4"
+                  animate={{ 
+                    y: [0, -10, 0],
+                  }}
                   transition={{ 
-                    duration: 20,
+                    duration: 3,
                     repeat: Infinity,
-                    ease: "linear"
+                    ease: "easeInOut",
                   }}
                 >
-                  <path 
-                    d="M50,10 A40,40 0 1,1 49.9,10" 
-                    fill="none" 
-                    stroke="currentColor" 
-                    strokeWidth="1.5"
-                  />
-                </motion.svg>
+                  <div className="w-16 h-16 bg-susegad-sand rounded-2xl shadow-lg transform rotate-12" />
+                  <div className="w-16 h-16 bg-susegad-turquoise rounded-2xl shadow-lg transform -rotate-12" />
+                </motion.div>
               </div>
-            </div>
-          </motion.div>
+            </motion.div>
+          </div>
         </div>
       </div>
     </section>

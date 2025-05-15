@@ -1,8 +1,7 @@
-
 import type { Config } from "tailwindcss";
-import plugin from "tailwindcss/plugin";
+import { fontFamily } from "tailwindcss/defaultTheme";
 
-export default {
+const config = {
 	darkMode: ["class"],
 	content: [
 		"./pages/**/*.{ts,tsx}",
@@ -54,26 +53,21 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
-				sidebar: {
-					DEFAULT: 'hsl(var(--sidebar-background))',
-					foreground: 'hsl(var(--sidebar-foreground))',
-					primary: 'hsl(var(--sidebar-primary))',
-					'primary-foreground': 'hsl(var(--sidebar-primary-foreground))',
-					accent: 'hsl(var(--sidebar-accent))',
-					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
-					border: 'hsl(var(--sidebar-border))',
-					ring: 'hsl(var(--sidebar-ring))'
-				},
-				// Susegad Stays brand colors
+				// Custom colors for Susegad
 				'susegad': {
-					'beige': '#E6CBA8',
-					'turquoise': '#7CD5D8',
-					'black': '#000000',
-				}
+					sand: '#F5E6D3',
+					terracotta: '#E27D60',
+					turquoise: '#41B3A3',
+					navy: '#1A2B3C',
+					gold: '#D4AF37',
+					sage: '#9CAF88',
+					cream: '#FFF8E7',
+				},
 			},
 			fontFamily: {
-				'sans': ['Inter', 'sans-serif'],
-				'display': ['Playfair Display', 'serif'],
+				sans: ['var(--font-sans)', ...fontFamily.sans],
+				display: ['var(--font-display)', ...fontFamily.serif],
+				serif: ['var(--font-serif)', ...fontFamily.serif],
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
@@ -100,65 +94,42 @@ export default {
 				'fade-in': {
 					'0%': {
 						opacity: '0',
-						transform: 'translateY(10px)'
+						transform: 'translateY(20px)'
 					},
 					'100%': {
 						opacity: '1',
 						transform: 'translateY(0)'
 					}
 				},
-				'fade-in-left': {
+				'slide-in': {
 					'0%': {
-						opacity: '0',
-						transform: 'translateX(-20px)'
+						transform: 'translateX(-100%)'
 					},
 					'100%': {
-						opacity: '1',
 						transform: 'translateX(0)'
 					}
 				},
-				'fade-in-right': {
+				'scale-in': {
 					'0%': {
-						opacity: '0',
-						transform: 'translateX(20px)'
+						transform: 'scale(0.95)',
+						opacity: '0'
 					},
 					'100%': {
-						opacity: '1',
-						transform: 'translateX(0)'
+						transform: 'scale(1)',
+						opacity: '1'
 					}
-				},
-				'wave': {
-					'0%, 100%': { transform: 'translateY(0)' },
-					'50%': { transform: 'translateY(-5px)' }
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out',
-				'fade-in': 'fade-in 0.7s ease-out',
-				'fade-in-left': 'fade-in-left 0.7s ease-out',
-				'fade-in-right': 'fade-in-right 0.7s ease-out',
-				'fade-in-delay-1': 'fade-in 0.7s ease-out 0.2s forwards',
-				'fade-in-delay-2': 'fade-in 0.7s ease-out 0.4s forwards',
-				'fade-in-delay-3': 'fade-in 0.7s ease-out 0.6s forwards',
-				'wave': 'wave 3s ease-in-out infinite',
+				'fade-in': 'fade-in 0.5s ease-out forwards',
+				'slide-in': 'slide-in 0.5s ease-out forwards',
+				'scale-in': 'scale-in 0.3s ease-out forwards',
 			}
 		}
 	},
-	plugins: [
-		require("tailwindcss-animate"),
-		plugin(function({ addUtilities }) {
-			addUtilities({
-				'.text-shadow-sm': {
-					'text-shadow': '0 1px 2px rgba(0, 0, 0, 0.2)'
-				},
-				'.text-shadow-md': {
-					'text-shadow': '0 2px 4px rgba(0, 0, 0, 0.3)'
-				},
-				'.text-shadow-lg': {
-					'text-shadow': '0 4px 8px rgba(0, 0, 0, 0.5)'
-				},
-			});
-		})
-	],
+	plugins: [require("tailwindcss-animate") as any],
 } satisfies Config;
+
+export default config;

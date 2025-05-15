@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
-import { MapPin } from "lucide-react";
+import { MapPin, ChevronDown } from "lucide-react";
+import { motion } from "framer-motion";
 
 const HeroSection = () => {
   // WhatsApp message template
@@ -11,50 +12,88 @@ const HeroSection = () => {
   const mapsUrl = "https://maps.app.goo.gl/2xwuRc79oeQwmp627?g_st=com.google.maps.preview.copy";
 
   return (
-    <section id="hero" className="relative h-screen flex items-center">
+    <section id="hero" className="relative min-h-screen flex items-center overflow-hidden">
+      {/* Background Image with Parallax Effect */}
       <div 
-        className="absolute inset-0 bg-cover bg-center z-0"
+        className="absolute inset-0 bg-cover bg-center bg-fixed z-0"
         style={{ 
-          backgroundImage: "url('/images/hero/296A0512-89F5-4022-A2CD-D5F6CF2CE653.jpg')", 
+          backgroundImage: "url('/images/hero/296A0512-89F5-4022-A2CD-D5F6CF2CE653.jpg')",
+          transform: "scale(1.1)",
         }}
       >
-        <div className="absolute inset-0 bg-black bg-opacity-40"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/60"></div>
       </div>
       
+      {/* Content Container */}
       <div className="container mx-auto relative z-10 px-6 md:px-12">
         <div className="max-w-4xl">
-          <h1 className="text-5xl md:text-7xl font-display font-medium text-white mb-4 opacity-0 animate-fade-in">
-            Susegad Stays
-          </h1>
-          <p className="text-xl md:text-3xl text-white mb-4 opacity-0 animate-fade-in-delay-1">
-            Unplug. Unwind. Embrace the Goan Way of Life.
-          </p>
-          <a 
-            href={mapsUrl}
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="flex items-center text-white mb-8 opacity-0 animate-fade-in-delay-1 hover:text-susegad-turquoise transition-colors"
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
           >
-            <MapPin size={18} className="mr-2" />
-            <p className="text-lg">Near Bambolim Beach, opposite Grand Hyatt</p>
-          </a>
-          <div className="opacity-0 animate-fade-in-delay-2">
+            <h1 className="text-6xl md:text-8xl font-display font-medium text-white mb-6 leading-tight">
+              Susegad Stays
+            </h1>
+          </motion.div>
+          
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+          >
+            <p className="text-2xl md:text-4xl text-susegad-sand mb-6 font-serif italic">
+              Unplug. Unwind. Embrace the Goan Way of Life.
+            </p>
+          </motion.div>
+          
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
+          >
+            <a 
+              href={mapsUrl}
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="inline-flex items-center text-susegad-sand mb-8 hover:text-susegad-turquoise transition-colors duration-300"
+            >
+              <MapPin size={20} className="mr-2" />
+              <p className="text-lg font-medium">Near Bambolim Beach, opposite Grand Hyatt</p>
+            </a>
+          </motion.div>
+          
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
+            className="flex flex-col sm:flex-row gap-4"
+          >
             <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">
               <Button 
-                className="px-8 py-6 text-lg bg-susegad-turquoise hover:bg-susegad-turquoise/90 text-black"
+                className="px-8 py-6 text-lg bg-susegad-turquoise hover:bg-susegad-turquoise/90 text-susegad-navy font-medium transition-all duration-300 transform hover:scale-105"
               >
                 Book Now
               </Button>
             </a>
-          </div>
+            <Button 
+              variant="outline"
+              className="px-8 py-6 text-lg border-2 border-susegad-sand text-susegad-sand hover:bg-susegad-sand/10 font-medium transition-all duration-300 transform hover:scale-105"
+            >
+              Explore More
+            </Button>
+          </motion.div>
         </div>
       </div>
       
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-        </svg>
-      </div>
+      {/* Scroll Indicator */}
+      <motion.div 
+        className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+        animate={{ y: [0, 10, 0] }}
+        transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+      >
+        <ChevronDown className="h-8 w-8 text-susegad-sand" />
+      </motion.div>
     </section>
   );
 };

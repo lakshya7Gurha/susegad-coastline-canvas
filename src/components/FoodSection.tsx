@@ -1,32 +1,11 @@
-
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Clock, ChevronRight } from 'lucide-react';
+import { Button } from './ui/button';
 
 const FoodSection = () => {
   const [activeCategory, setActiveCategory] = useState('fine-dining');
   
-  useEffect(() => {
-    const observerOptions = {
-      root: null,
-      rootMargin: '0px',
-      threshold: 0.2,
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('animated');
-        }
-      });
-    }, observerOptions);
-
-    const elements = document.querySelectorAll('.animate-on-scroll');
-    elements.forEach(el => observer.observe(el));
-
-    return () => {
-      elements.forEach(el => observer.unobserve(el));
-    };
-  }, []);
-
   const categories = [
     { id: 'fine-dining', name: 'Fine Dining' },
     { id: 'casual-cafes', name: 'Casual Cafés' },
@@ -123,54 +102,149 @@ const FoodSection = () => {
     ],
   };
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5,
+        ease: "easeOut"
+      }
+    }
+  };
+
   return (
-    <section id="food" className="bg-white py-24">
-      <div className="container mx-auto px-6 md:px-12">
-        <h2 className="font-display text-4xl md:text-5xl font-medium mb-6 text-center">Eat Like a Local</h2>
-        <p className="text-xl text-gray-600 mb-12 text-center max-w-3xl mx-auto">
-          Goa is a food lover's paradise. From fresh seafood to international cuisine, 
-          here are our personal recommendations for an unforgettable culinary journey.
-        </p>
+    <section id="food" className="relative py-32 bg-gradient-to-b from-susegad-cream to-white overflow-hidden">
+      {/* Background Decorative Elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <motion.div
+          className="absolute top-1/4 -right-24 w-96 h-96 bg-susegad-turquoise/5 rounded-full"
+          animate={{
+            scale: [1, 1.1, 1],
+            rotate: [0, 45, 0],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+        <motion.div
+          className="absolute bottom-1/4 -left-24 w-96 h-96 bg-susegad-terracotta/5 rounded-full"
+          animate={{
+            scale: [1, 1.2, 1],
+            rotate: [0, -45, 0],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 1,
+          }}
+        />
+      </div>
+
+      <div className="container mx-auto px-6 md:px-12 relative">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16"
+        >
+          <h2 className="font-display text-5xl md:text-6xl font-medium mb-6 text-susegad-navy">Eat Like a Local</h2>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            Goa is a food lover's paradise. From fresh seafood to international cuisine, 
+            here are our personal recommendations for an unforgettable culinary journey.
+          </p>
+        </motion.div>
         
-        <div className="flex flex-wrap justify-center gap-3 mb-10 animate-on-scroll">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="flex flex-wrap justify-center gap-3 mb-12"
+        >
           {categories.map((category) => (
-            <button
+            <motion.button
               key={category.id}
               onClick={() => setActiveCategory(category.id)}
-              className={`px-6 py-2 rounded-full transition-colors duration-300 ${
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className={`px-6 py-3 rounded-full transition-all duration-300 font-medium ${
                 activeCategory === category.id 
-                  ? 'bg-susegad-turquoise text-black'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  ? 'bg-susegad-turquoise text-susegad-navy shadow-md'
+                  : 'bg-white text-gray-700 hover:bg-gray-50 shadow-sm'
               }`}
             >
               {category.name}
-            </button>
+            </motion.button>
           ))}
-        </div>
+        </motion.div>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 animate-on-scroll">
-          {restaurants[activeCategory].map((restaurant, index) => (
-            <div 
-              key={`${activeCategory}-${index}`}
-              className="bg-gray-50 p-6 rounded-lg hover:shadow-md transition-shadow duration-300 border-b-2 border-susegad-turquoise"
-            >
-              <h3 className="text-xl font-medium mb-2">{restaurant.name}</h3>
-              <p className="text-gray-600 mb-4">{restaurant.description}</p>
-              <div className="flex items-center text-sm text-gray-500">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                <span>{restaurant.distance}</span>
-              </div>
-            </div>
-          ))}
-        </div>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeCategory}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
+            variants={containerVariants}
+            className="grid grid-cols-1 md:grid-cols-3 gap-8"
+          >
+            {restaurants[activeCategory].map((restaurant, index) => (
+              <motion.div
+                key={`${activeCategory}-${index}`}
+                variants={itemVariants}
+                className="group bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100"
+              >
+                <h3 className="text-2xl font-medium mb-3 text-susegad-navy group-hover:text-susegad-turquoise transition-colors duration-300">
+                  {restaurant.name}
+                </h3>
+                <p className="text-gray-600 mb-6 text-lg">
+                  {restaurant.description}
+                </p>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center text-gray-500">
+                    <Clock className="h-5 w-5 mr-2" />
+                    <span>{restaurant.distance}</span>
+                  </div>
+                  <Button
+                    variant="ghost"
+                    className="group-hover:text-susegad-turquoise transition-colors duration-300"
+                  >
+                    View Details
+                    <ChevronRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+                  </Button>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </AnimatePresence>
         
-        <div className="mt-12 text-center animate-on-scroll">
-          <p className="italic text-gray-600">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="mt-16 text-center"
+        >
+          <p className="text-xl italic text-gray-600">
             "Ask our host for current recommendations and hidden gems—the Goan food scene is always evolving!"
           </p>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
